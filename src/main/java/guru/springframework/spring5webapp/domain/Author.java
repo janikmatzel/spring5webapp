@@ -6,15 +6,16 @@ import java.util.Set;
 
 @Entity
 public class Author {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private String firstName;
     private String lastName;
 
     @ManyToMany(mappedBy = "authors")
     private Set<Book> books = new HashSet<>();
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
     public Author() {
     }
@@ -24,10 +25,12 @@ public class Author {
         this.lastName = lastName;
     }
 
-    public Author(String firstName, String lastName, Set<Book> books) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.books = books;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -54,22 +57,13 @@ public class Author {
         this.books = books;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Id
-    public Long getId() {
-        return id;
-    }
-
     @Override
     public String toString() {
         return "Author{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", books=" + books +
-                ", id=" + id +
                 '}';
     }
 
